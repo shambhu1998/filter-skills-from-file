@@ -7,6 +7,7 @@ from django.core.files.storage import FileSystemStorage
 
 
 import nltk
+nltk.download('stopwords')
 from pyresparser import ResumeParser
 
 # import camelot

@@ -12,7 +12,7 @@
 </form>
 
  {% if upload_file_path %}
-    Uploaded at: <label class="text-primary">{{ upload_file_path }}</label>
+    Uploaded at: <label class="text-primary">{{ upload_file_path }}</label><br>
     <h1>
       Name: {{Name}}
     </h1>
@@ -22,6 +22,8 @@
     <h1>
       Skills: {{Skills}}
     </h1>
+
+    <h1>Processing time: {{time}}s</h1><br>
  {% endif %}
 
 {% endblock %}

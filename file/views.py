@@ -1,7 +1,10 @@
+import time
+
 from django.shortcuts import redirect
 
 from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
+
 
 import nltk
 from pyresparser import ResumeParser
@@ -20,6 +23,8 @@ def index_redirect(request):
 
 def index(request):
     if request.method == 'POST' and request.FILES['file']:
+        start_time = time.time()
+
         upload_file = request.FILES['file']
         extension = os.path.splitext(upload_file.name)[1]
         if extension=='.pdf' or '.doc':
@@ -32,26 +37,17 @@ def index(request):
             print(data)
 
             os.remove(upload_file_path)
-
-        return render(request, 'file/index.html', {
+        stop_time = time.time()
+        response = {
             'upload_file_path': upload_file_path,
             'Name': data['name'],
             'Email': data['email'],
-            'Skills': data['skills']
+            'Skills': data['skills'],
+            'time': format(stop_time - start_time, '.2f'),
+        }
 
-        })
+        return render(request, 'file/index.html', context=response )
 
 
     else:
         return render(request, 'file/index.html')
-
-
-# output = open('output.txt', 'w')
-# subprocess.call(['pdf2txt.py', upload_file_path], stdout=output)
-# output.close()
-# os.remove(upload_file_path)
-
-# tables = camelot.read_pdf(upload_file_path, flavor='stream', table_areas=['0,800,800,0'])
-# tables.export('foo.csv', f='csv', compress=True)
-# tables[0].to_csv('foo.csv')
-# os.remove(upload_file_path)

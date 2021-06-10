@@ -15,7 +15,7 @@ cycler==0.10.0
 cymem==2.0.3
 decorator==4.4.1
 distro==1.4.0
-Django==2.2.9
+Django==2.2.24
 docx2txt==0.8
 EbookLib==0.17.1
 et-xmlfile==1.0.1
